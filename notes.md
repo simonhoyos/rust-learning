@@ -366,6 +366,44 @@ fn test_gcd() {
 - `eprintln!` write out error messages to the standard error output stream.
 - `format!` takes a template string, substitutes formatted arguments, and returns a new string.
 
+## Ownership, Borrowing, and lifetime
+
+- Who is the owner of a value. In Rust a value (no copy type) can only be owned by a single variable.
+- When we assign a variable to another one we are actually moving the ownership and the first one cease to exist.
+- In rust you can not assign uninitialized variables. If we try to do something with a variable that no longer owns a value then Rust panics.
+- Move ownership applies for assignments, function calls, function returns, for in loops.
+- If we don't want to move the ownership of a value we then borrow that value with a reference `&`.
+- Assigning a reference makes its referent read-only. We can not move its ownership, preventing dangling references.
+- Lifetimes are like scope but for references. A referrer should never outlive the referred.
+
+```rust
+fn create_vector() {
+  let mut a: Vec<&i32> = vec![];
+  let mut b = a;
+
+  // a - uninitialized
+
+  {
+    let n: i32 = 8;
+    b.push(&n); // panic  - b outlives n
+  }
+}
+```
+
+- Whenever a reference type appears inside another type's definition, we must write out its lifetime.
+
+```rust
+struct S<'a> {
+  n: &'a i32
+}
+
+struct D<'b> {
+  s: S<'b>
+}
+```
+
+- Rust doesn't compile if the code is not safe. Try without lifetimes and the add them as needed.
+
 ## Terminology
 
 - **panic** abrupt termination of a program with a message including the source location of the failing check.
