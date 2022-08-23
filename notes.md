@@ -403,6 +403,7 @@ struct D<'b> {
 ```
 
 - Rust doesn't compile if the code is not safe. Try without lifetimes and the add them as needed.
+- Multiple read-only references can be shared at a time, but we can share only one mutable.
 
 ## Terminology
 
