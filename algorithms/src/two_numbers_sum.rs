@@ -26,7 +26,8 @@ fn two_number_sum(v: &Vec<isize>, target: isize) -> Vec<isize> {
     let mut sums = HashMap::new();
 
     for n in v {
-        match sums.get(&n) {
+        let d: isize = target - n;
+        match sums.get(&d) {
             Some(_v) => {
                 r.push(*n);
                 r.push(target - n);
@@ -37,6 +38,7 @@ fn two_number_sum(v: &Vec<isize>, target: isize) -> Vec<isize> {
             }
         }
 
+        println!("{:?}", sums);
     }
 
     r
@@ -66,6 +68,8 @@ mod tests {
     fn two_number_sum_more_elements_vector() {
         let a: Vec<isize> = vec![3, 5, -4, 8, 11, 1, -1, 6];
         let r = two_number_sum(&a, 10);
+
+        println!("{:?}", r);
 
         assert_eq!(r.len(), 2);
         assert!(r.contains(&-1));
