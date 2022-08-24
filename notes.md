@@ -292,11 +292,47 @@ let msg = {;
 
 - Conditions must be an expression of type bool.
 - Rust does not implicitly convert to boolean values.
+- else if and else are optional.
+- no else behave as an empty block else `{}`.
+- All block of an if expression and match expressions must produce values of the same type.
 
 ```rust
 if n < m {
 } else if n > m {
 } else {
+}
+```
+
+- Patterns can match a range of values.
+- Unpack tuples
+- Match against individual fields of structs.
+- Chase references.
+- Borrow parts of a value.
+- Rust prohibits match expressions that do not cover all possible values.
+
+```rust
+match code {
+  0 => println!("OK"),
+  1 => println!("Wires Tangled"),
+  2 => println!("User Asleep"),
+  _ => println!("Unrecognized Error {}", code)
+}
+```
+
+- If let can be used when we need to get data out of Option or Result
+- Alternative to match.
+- Is an expression shorthand for a match with just one pattern.
+
+```rust
+if let Some(cookie) = request.session_cookie {
+  return restore_session(cookie);
+}
+
+if let Err(err) = show_cheesy_anti_robot_task() {
+  log_robot_attempt(err);
+  politely_accuse_user_of_being_a_robot();
+} else {
+  session.mark_as_human();
 }
 ```
 
