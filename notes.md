@@ -276,10 +276,28 @@ b = 35;
 const PORT:u16 = 8000;
 ```
 
-### Conditionals
+### Blocks
 
 ```rust
-if n < m {}
+let msg = {;
+  let dandelion_control = puffball.open();
+
+  dandelion_control.release_all_seeds(launch_codes);
+
+  dandelion_control.get_status()
+};
+```
+
+### Conditionals
+
+- Conditions must be an expression of type bool.
+- Rust does not implicitly convert to boolean values.
+
+```rust
+if n < m {
+} else if n > m {
+} else {
+}
 ```
 
 ### Loops
@@ -426,3 +444,4 @@ struct D<'b> {
 - Overflows in debug mode panic in prod wraps around.
 - Rust consistently permits an extra tailing comma everywhere commas are used.
 - Vectors and Arrays can call slice methods.
+- Everything is an expression, everything produces a value.
