@@ -165,6 +165,12 @@ enum Attend {
 }
 ```
 
+### Ranges
+
+```rust
+std::ops::Range { start: 0, end: 20 }
+```
+
 ### Boxes
 
 ### References (pointers)
@@ -184,6 +190,10 @@ enum Attend {
 ### Copy types
 
 Integers, floating-point, char, bool, array of copy types, tuple of copy types.
+
+### Iterable types
+
+Collections, HashMaps, Arrays, Vectors, Slices, Ranges, Strings.
 
 ### Reference count and Atomic reference count
 
@@ -338,22 +348,66 @@ if let Err(err) = show_cheesy_anti_robot_task() {
 
 ### Loops
 
+- While and for always produce ().
+- Loop can produce a value if specified.
+- Conditions must be of type bool.
+- Break keyword only works on loops.
+
 ```rust
 while m != 0 {}
 ```
 
+- The expression should match the pattern in order to run.
+- Analogous to if let expression.
+
 ```rust
-for n in &numbers[1..] {}
+while let pattern = expression {
+}
 ```
+
+- Infinite loops until `break` or `return` or thread panics.
+- We can give break an expression, whose value becomes that of the loop.
+- All break values within a loop must be the same type.
+
+```rust
+loop {
+  break "hello";
+}
+```
+
+- Evaluates the iterable on every run.
 
 ```rust
 for i in 0..n {}
 ```
 
-#### Infinite loops
+- Consumes the value iterable (move reference).
+- If we don't want to consume the value then we should iterate over a reference.
+- Iterating over a mut reference provides a mut reference to each element.
 
 ```rust
-loop {}
+for n in &numbers[1..] {}
+```
+
+- Loops can be label with a lifetime.
+- Break can have both a label and a value expression.
+- Labels can also be used with continue.
+
+```rust
+let sqrt = 'outer: loop {
+  let n = next_number();
+
+  for i in 1.. {
+    let square = i * i;
+
+    if square == n {
+      break 'outer i;
+    }
+    if square > n {
+      break;
+    }
+  }
+};
 ```
 
 ### Functions
