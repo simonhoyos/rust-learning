@@ -517,6 +517,10 @@ struct D<'b> {
 
 - **panic** abrupt termination of a program with a message including the source location of the failing check.
 
+## Keywords
+
+fn, return, let, const, mut, struct, use, if / else if / else, match, for in, while, loop, break, continue
+
 ## Other
 
 - return statement is not required if a function body ends with an expression that is not followed by a semicolon.
