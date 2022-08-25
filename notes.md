@@ -319,6 +319,7 @@ if n < m {
 - Chase references.
 - Borrow parts of a value.
 - Rust prohibits match expressions that do not cover all possible values.
+- ? is shorthand for Result type match
 
 ```rust
 match code {
@@ -327,6 +328,16 @@ match code {
   2 => println!("User Asleep"),
   _ => println!("Unrecognized Error {}", code)
 }
+```
+
+```rust
+let output = File::create(filename)?;
+
+// return from the enclosing function
+let output = match File::create(filename) {
+  Ok(f) => f,
+  Err(err) => return Err(err),
+};
 ```
 
 - If let can be used when we need to get data out of Option or Result
