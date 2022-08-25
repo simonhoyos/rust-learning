@@ -448,6 +448,36 @@ fn gcd(mut n: u64, mut m: u64) -> u64 {
 }
 ```
 
+### User defined Types
+
+- can call methods with . operator.
+- methods can be called for values, references, or smart pointers.
+- . operator automatically dereferences or borrow a reference as needed.
+- methods can be chained.
+
+```rust
+server
+  .bind("127.0.0.1:3000")
+  .expect("error binding server to address")
+  .run()
+  .expect("error running server");
+```
+
+- :: is used to call type-associated functions.
+- similar to static methods in OOP.
+
+```rust
+let v = Vec::new();
+```
+
+- turbofish operator allow us to define generics in function and method calls.
+
+```rust
+let v = Vec::<i32>::with_capacity(10);
+
+let v = (0..10).collect::<Vec<i32>>();
+```
+
 ### Modules
 
 #### Installation
