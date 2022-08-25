@@ -98,6 +98,9 @@ s.chars().count();
 
 (...types)
 
+- access values using dot notation.
+- Values to the left of . are automatically dereferenced.
+
 ```rust
 let t: () = ();
 let t2: (i32, bool, char) = (32, false, "h");
@@ -107,7 +110,11 @@ t2.2;
 let (n, b, c) = t2;
 ```
 
-### Vectors
+### Collections
+
+**Iterable types:** Collections, HashMaps, Arrays, Vectors, Slices, Ranges, Strings.
+
+#### Vectors
 
 Vec<type>
 
@@ -124,7 +131,7 @@ v3.len();
 v3.capacity();
 ```
 
-### Arrays
+#### Arrays
 
 [type; length]
 
@@ -134,18 +141,31 @@ let b = a[0];
 let l = b.len()
 ```
 
-### Slices
+#### Slices
+
+#### Ranges
+
+```rust
+std::ops::Range { start: 0, end: 20 }
+```
 
 ### Structs
 
 {}, ()
 
+- access values using dot notation.
+- Values to the left of . are automatically dereferenced.
+
 ```rust
 struct  S { x: f32, y: f32 };
 let s = S { x: 120.0, y: 20.9 };
 
+let sx = s.x
+
 struct T (i32, char);
 let t = T(120, "x");
+
+let t1 = t.1
 
 struct E;
 let e = E;
@@ -163,12 +183,6 @@ enum Attend {
   OnTime,
   Late(u32)
 }
-```
-
-### Ranges
-
-```rust
-std::ops::Range { start: 0, end: 20 }
 ```
 
 ### Boxes
@@ -191,9 +205,6 @@ std::ops::Range { start: 0, end: 20 }
 
 Integers, floating-point, char, bool, array of copy types, tuple of copy types.
 
-### Iterable types
-
-Collections, HashMaps, Arrays, Vectors, Slices, Ranges, Strings.
 
 ### Reference count and Atomic reference count
 
