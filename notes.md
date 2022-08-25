@@ -431,6 +431,13 @@ fn sum(mut n: u64, mut m: u64) -> u64 {
 sum(1,2)
 ```
 
+### Return
+
+- exits the current function, returning a value to the caller.
+- return without value is shorthand for `return ();`
+- return statement is not required if a function body ends with an expression that is not followed by a semicolon.
+- return are usually used for early returns.
+
 ### Mutations
 
 ```rust
@@ -564,8 +571,6 @@ fn, return, let, const, mut, struct, use, if / else if / else, match, for in, wh
 
 ## Other
 
-- return statement is not required if a function body ends with an expression that is not followed by a semicolon.
-- return are usually used for early returns.
 - test are ignored in normal compilation.
 - trait is a collection of methods that types can implement.
 - rust doesn't include exceptions. All errors are handled using either Result or Panic.
@@ -580,3 +585,4 @@ fn, return, let, const, mut, struct, use, if / else if / else, match, for in, wh
 - Rust consistently permits an extra tailing comma everywhere commas are used.
 - Vectors and Arrays can call slice methods.
 - Everything is an expression, everything produces a value.
+- It's consider a good practice to omit the types whenever they can be inferred.
