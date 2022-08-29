@@ -143,10 +143,28 @@ let l = b.len()
 
 #### Slices
 
+- portion of borrowed slices, arrays, or vectors.
+- de portion is determined by a range.
+
+
+```rust
+let v = vec![1,2,3,4,];
+let s = &v[0..=2];
+```
+
 #### Ranges
+
+**Ranges:**
+  - .. full
+  - a .. from a
+  - .. b to b (non-inclusive)
+  - ..= b to b (inclusive)
+  - a .. b a to b (non-inclusive)
+  - a ..=  b a to b (inclusive)
 
 ```rust
 std::ops::Range { start: 0, end: 20 }
+let r1 = 0..9
 ```
 
 ### Structs
