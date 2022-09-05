@@ -219,6 +219,16 @@ enum Attend {
 
 ### Closures
 
+Lightweight function-like values.
+
+```rust
+let is_even = |x| x % 2 == 0;
+
+let is_even = |x: u32| -> bool { x % 2 == 0 };
+
+is_even(14);
+```
+
 ### Copy types
 
 Integers, floating-point, char, bool, array of copy types, tuple of copy types.
