@@ -561,6 +561,7 @@ fn test_gcd() {
 - `println!` takes a template string, substitutes formatted arguments, and writes the result to the standard output stream.
 - `eprintln!` write out error messages to the standard error output stream.
 - `format!` takes a template string, substitutes formatted arguments, and returns a new string.
+- `panic!` panics with an optional println-like message.
 
 ## Ownership, Borrowing, and lifetime
 
@@ -601,9 +602,27 @@ struct D<'b> {
 - Rust doesn't compile if the code is not safe. Try without lifetimes and the add them as needed.
 - Multiple read-only references can be shared at a time, but we can share only one mutable.
 
-## Terminology
+## Error Handling
 
-- **panic** abrupt termination of a program with a message including the source location of the failing check.
+Rust doesn't include exceptions. All errors are handled using either Result or Panic.
+
+### Panic
+
+- abrupt termination of a program with a message including the source location of the failing check.
+- Panics are safe. Even if you manage to panic in the middle of a standard library method, it will never leave a dangling pointer or a half-initialized value in memory.
+- Rust unwinds the stack. But the rest of the process can continue running.
+- Panic is per thread.
+- If a panic occurs while unwinding the stack. Rust stops unwinding and aborts the whole process.
+- Panic behavior is customizable at compilation with the option `-C panic=abort`. (Rust does not need to know how to unwind the stack, so this can reduce the size of your compiled code)
+
+### Result
+
+- Rust doesn't have exceptions. Instead functions that can fail have a return type that says so:
+- It returns either `Ok(v)` or `Err(error_v).`
+
+```rust
+fn get_weather(location: LatLng) -> Result<WeatherReport, io::Error> {}
+```
 
 ## Keywords
 
@@ -613,9 +632,6 @@ fn, return, let, const, mut, struct, use, if / else if / else, match, for in, wh
 
 - test are ignored in normal compilation.
 - trait is a collection of methods that types can implement.
-- rust doesn't include exceptions. All errors are handled using either Result or Panic.
-- & borrows a reference (borrowing).
-- * dereferences a reference, and yields the value it refers to.
 - if main does not returns at all, rust assume the program finished successfully (exit code: 0).
 - libraries are called crates.
 - Rust has type inference.
@@ -626,3 +642,4 @@ fn, return, let, const, mut, struct, use, if / else if / else, match, for in, wh
 - Vectors and Arrays can call slice methods.
 - Everything is an expression, everything produces a value.
 - It's consider a good practice to omit the types whenever they can be inferred.
+- Try to never panic.
