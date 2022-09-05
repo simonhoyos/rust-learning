@@ -232,7 +232,8 @@ Integers, floating-point, char, bool, array of copy types, tuple of copy types.
 ## Arithmetic
 
 - + - * / %
-- += -= *= /= %=
+- += -= *= /= %= (compound assignment)
+- & | ^ << >> ! (bitwise operators)
 - checked operations (methods) return Option, Some(v) or None
 - wrapping operations (methods) return v % n^bits
 - saturating operations (methods) return closest mathematically correct result (min - max)
@@ -254,7 +255,7 @@ Integers, floating-point, char, bool, array of copy types, tuple of copy types.
 
 - ==, !=, <, <=, >, >=.
 
-## Logical Operators
+## Logical Operators (short-circuiting)
 
 - &&, ||
 
