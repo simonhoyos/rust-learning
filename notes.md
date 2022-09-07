@@ -560,6 +560,7 @@ fn test_gcd() {
 - `assert_eq!` asserts that two expressions are equal to each other.
 - `println!` takes a template string, substitutes formatted arguments, and writes the result to the standard output stream.
 - `eprintln!` write out error messages to the standard error output stream.
+- `writeln!` write out data to a stream of your choice
 - `format!` takes a template string, substitutes formatted arguments, and returns a new string.
 - `panic!` panics with an optional println-like message.
 
@@ -605,6 +606,9 @@ struct D<'b> {
 ## Error Handling
 
 Rust doesn't include exceptions. All errors are handled using either Result or Panic.
+- Rust requires the programmer to make some sort of decision, and record it in the code. This way is harder to neglect error handling.
+- The most common is to propagate the errors.
+- Returning result makes clear which functions can fails and which can't.
 
 ### Panic
 
@@ -615,13 +619,88 @@ Rust doesn't include exceptions. All errors are handled using either Result or P
 - If a panic occurs while unwinding the stack. Rust stops unwinding and aborts the whole process.
 - Panic behavior is customizable at compilation with the option `-C panic=abort`. (Rust does not need to know how to unwind the stack, so this can reduce the size of your compiled code)
 
-### Result
+### Capturing Errors
 
 - Rust doesn't have exceptions. Instead functions that can fail have a return type that says so:
 - It returns either `Ok(v)` or `Err(error_v).`
 
 ```rust
 fn get_weather(location: LatLng) -> Result<WeatherReport, io::Error> {}
+
+match get_weather(hometown) {
+  Ok(report) => {
+    display_weather(hometown, &report);
+  }
+  Err(err) => {
+    println!("error querying the weather: {}", err);
+    schedule_weather_retry();
+  }
+}
+```
+
+### Propagating Errors
+
+- Don't catch the error and handle it immediately.
+- Let the caller deal with the error.
+- On success unwrap the value.
+- On error, return from the enclosing function, passing the error up the call chain.
+- Can only be used in functions that have Result return type.
+
+```rust
+let weather = get_weather(hometown)?;
+```
+
+**Note:** also works with Option.
+
+### Ignoring Errors
+
+- For those cases that you know that an error can't happen.
+- You don't have to write all the logic to handle the error.
+- The program panics if an error happens.
+
+```rust
+let num = digits.parse::<u64>().unwrap();
+```
+
+### User Defined Errors
+
+```rust
+#[derive(Debug, Clone)]
+pub struct JsonError {
+  pub message: String,
+  pub line: usize,
+  pub column: usize,
+};
+
+return Err(JsonError {
+  message: "expected ']' at end of array".to_string(),
+  line: current_line,
+  column: current_column,
+})
+```
+
+```rust
+use std::fmt;
+
+impl fmt::Display for JsonError {
+  fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+    write!(f, "{} ({}:{})", self.message, self.line, self.column)
+  }
+}
+
+impl std::error:Error for JsonError { }
+```
+
+```rust
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+#[error("{message:} ({line:}, {column})")]
+pub struct JsonError {
+  message: String,
+  line: usize,
+  column: usize,
+}
 ```
 
 ## Keywords
