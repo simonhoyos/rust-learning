@@ -21,6 +21,12 @@
 
 ## Data Types and Structures
 
+### Type Aliases
+
+```rust
+pub type Result<T> = result::Result<T, Error>;
+```
+
 ### Primitives
 
 #### Signed integers
@@ -68,6 +74,14 @@ let f: f32 = 1.61;
 let f2: f64 = 31415.926e-4
 ```
 
+#### Chars
+
+```rust
+let c: char = '*';
+let c2: char = '\xHH';
+let c3: char = U+0000;
+```
+
 #### Boolean
 
 - bool
@@ -76,7 +90,7 @@ let f2: f64 = 31415.926e-4
 let b: bool = true;
 ```
 
-#### Strings
+### Strings
 
 - String (UTF-8 string, dynamically sized)
 - char (Unicode character, 32 bits wide **not** i32 or u32)
@@ -86,9 +100,6 @@ let s: String = "Hello world";
 let r: String = r#"
 Hello world
 "#; // raw string
-let c: char = "*";
-let c2: char = '\xHH';
-let c3: char = U+0000;
 
 s.len();
 s.chars().count();
@@ -203,6 +214,14 @@ enum Attend {
 }
 ```
 
+### Result
+
+- A value if ok or an error.
+
+### Option
+
+- Some value if found or None.
+
 ### Boxes
 
 ### References (pointers)
@@ -210,10 +229,6 @@ enum Attend {
 - &table
 - &mut e
 - *table
-
-### Option
-
-### Result
 
 ### Functions
 
