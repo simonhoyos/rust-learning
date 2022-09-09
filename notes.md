@@ -14,6 +14,8 @@
 - `cargo run` runs the current project.
 - `cargo clean` cleans build generated files.
 - `cargo test` runs tests.
+- `cargo fix` automatically fix lint errors.
+- `cargo fmt` formats the entire project.
 
 ## Files
 
