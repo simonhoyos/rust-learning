@@ -96,6 +96,7 @@ let b: bool = true;
 
 - String (UTF-8 string, dynamically sized)
 - char (Unicode character, 32 bits wide **not** i32 or u32)
+- str are string literals and generally unchanging
 
 ```rust
 let s: String = "Hello world";
