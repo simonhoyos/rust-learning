@@ -248,6 +248,11 @@ let simon = Person::new("simon");
 
 ### Enums
 
+- Type that can only be equal to one of a set of predefined values.
+- Each enumeration entry can include data or even functions.
+- Access members of an enum using ::.
+- When pattern matching enums you can obtain the data from an enumeration destructuring it.
+
 {}
 
 ```rust
@@ -255,6 +260,8 @@ enum Attend {
   OnTime,
   Late(u32)
 }
+
+Attend::OnTime
 ```
 
 ### Result
@@ -787,7 +794,8 @@ pub struct JsonError {
 
 ## Keywords
 
-fn, return, let, const, mut, struct, impl, mod, pub, use, if / else if / else, match, for in, while, loop, break, continue
+fn, return, let, const, mut, struct, impl, mod, pub, use, if / else if / else, match, for in, while, loop, break,
+continue, enum
 
 ## Other
 
