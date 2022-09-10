@@ -203,12 +203,41 @@ struct E;
 let e = E;
 ```
 
+#### Constructors and methods
+
+- A method associated with a type that provide a quick way to create an instance of that type (invoked with turbofish
+  notation).
+- If the function accepts &self it is a member function or a method (invoked with dot notation). A reference to the
+  instance is automatically passed to the method.
+
+```rust
+struct Person {
+  name: String,
+  greeting: String,
+}
+
+impl Person {
+  fn new(name: &str) -> Self {
+    Self {
+      name: name.to_lowercase(),
+    }
+  }
+
+  fn greet_visitor(&self) {
+    println!("{}", self.greeting)
+  }
+}
+
+let simon = Person::new("simon");
+```
+
+#### Self
+
+- Represent the type for which we are implementing a method.
+
 ### Enums
 
 {}
-
-```rust
-```
 
 ```rust
 enum Attend {
@@ -544,6 +573,8 @@ let v = (0..10).collect::<Vec<i32>>();
 ```
 
 ### Modules
+
+- Cargo build install dependencies defined in Cargo.toml and transitive dependencies.
 
 #### Installation
 
