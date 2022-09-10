@@ -128,6 +128,13 @@ let (n, b, c) = t2;
 
 **Iterable types:** Collections, HashMaps, Arrays, Vectors, Slices, Ranges, Strings.
 
+#### Iterators
+
+- There are a list of methods to work with iterators.
+- These methods perform better than for in loops.
+- They are optimized because they can ignore some type validations and common errors (like going beyond the length of a
+  vector).
+
 #### Vectors
 
 Vec<type>
