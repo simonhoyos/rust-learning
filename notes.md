@@ -98,6 +98,9 @@ let b: bool = true;
 - char (Unicode character, 32 bits wide **not** i32 or u32)
 - str are string literals and generally unchanging
 
+* Accepting &str as argument to a function, the function accepts string literals. This saves us from typing
+String::from("something")
+
 ```rust
 let s: String = "Hello world";
 let r: String = r#"
@@ -194,6 +197,7 @@ let r1 = 0..9
 
 - access values using dot notation.
 - Values to the left of . are automatically dereferenced.
+- Structs can implement functionality for that type.
 
 ```rust
 struct  S { x: f32, y: f32 };
@@ -273,7 +277,8 @@ enum Attend {
 
 ### Closures
 
-Lightweight function-like values.
+- Lightweight function-like values.
+- Commonly used to define function in place, in line.
 
 ```rust
 let is_even = |x| x % 2 == 0;
@@ -598,7 +603,12 @@ use std::env;
 Mark functions and declarations with extra information.
 Controls compiler warnings, code style checks, conditional code inclusion, embedded languages, and more.
 
-## Testing
+### Derive
+
+- Prevent writing repetitive code
+- Every field in the structure should support the feature you are deriving
+
+### Testing
 
 ```rust
 #[test]
@@ -609,16 +619,28 @@ fn test_gcd() {
 }
 ```
 
+### Debugging
+
+```rust
+#[derive(Debug)]
+struct Visitor {
+  name: String,
+  greeting: String,
+}
+```
+
 ## Macros
 
 - `assert!` checks that the argument is true otherwise terminates the program (panic).
 - `debug_assert!` skip assertions when the program is compiled.
 - `assert_eq!` asserts that two expressions are equal to each other.
 - `println!` takes a template string, substitutes formatted arguments, and writes the result to the standard output stream.
+  - {} placeholder, {:?} debug placeholder, {:#?} pretty printing.
 - `eprintln!` write out error messages to the standard error output stream.
 - `writeln!` write out data to a stream of your choice
 - `format!` takes a template string, substitutes formatted arguments, and returns a new string.
 - `panic!` panics with an optional println-like message.
+- `vec!` initialize a new vector literal.
 
 ## Ownership, Borrowing, and lifetime
 
@@ -759,9 +781,13 @@ pub struct JsonError {
 }
 ```
 
+### Traits;
+
+- Debug
+
 ## Keywords
 
-fn, return, let, const, mut, struct, use, if / else if / else, match, for in, while, loop, break, continue
+fn, return, let, const, mut, struct, impl, mod, pub, use, if / else if / else, match, for in, while, loop, break, continue
 
 ## Other
 
