@@ -16,6 +16,8 @@
 - `cargo test` runs tests.
 - `cargo fix` automatically fix lint errors.
 - `cargo fmt` formats the entire project.
+- `rustup update` updates rust.
+- `rustup toolchain list` gives an overview of what is installed.
 
 ## Files
 
