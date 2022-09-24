@@ -198,6 +198,9 @@ let r1 = 0..9
 - access values using dot notation.
 - Values to the left of . are automatically dereferenced.
 - Structs can implement functionality for that type.
+- We can make a field of an struct public by using `pub` keyword.
+- private fields can only be read in the module the struct was defined. (even if we create the struct in another module
+  the field is not accessible).
 
 ```rust
 struct  S { x: f32, y: f32 };
@@ -591,9 +594,22 @@ let v = Vec::<i32>::with_capacity(10);
 let v = (0..10).collect::<Vec<i32>>();
 ```
 
-### Modules
+### Crates and Modules
 
+- Crates are large groups of code with their own `Cargo.toml` file (libraries/dependencies).
+- Module is a section of code within a crate. (separate file/directory)
 - Cargo build install dependencies defined in Cargo.toml and transitive dependencies.
+- Cargo compiles modules concurrently, which reduces the compilation time.
+- Modules can be included in the compilation by adding them with the mod keyword in the `main.rs` file. (this is not a
+  tree, all of them should be included in main).
+- Modules are self contained and have their own scope. Everything is private by default.
+- `mod` imports the module into the global scope and items defined inside the module can be accessed as
+  `use crate::name_of_module::name_of_item`.
+- `pub` marks an item inside a module as public making them accessible by other modules and crates.
+- is good practice to keep much of the contents of a module private and make public only the necessary items. (Law of
+  Demeter). The public methods became the entry and exit point and the developers don't need to learn all the details
+- Anything declared inside a module prelude can be
+- super accessed the module immediately above your module in the tree.
 
 #### Installation
 
@@ -603,6 +619,9 @@ Simple define crates, version, and additional options in `Cargo.toml` file. When
 
 ```rust
 use std::env;
+
+// local modules math.rs
+use crate::math;
 ```
 
 ## Attributes
@@ -788,19 +807,26 @@ pub struct JsonError {
 }
 ```
 
-### Traits;
+### Traits
 
-- Debug
+- Are way to define shared functionality for objects.
+- Collection of methods that types can implement.
+
+**Derivations**
+
+- Debug: allow to use {:?} when printing to get a debug value.
+- Clone: add clone function to the type that performs a deep clone of the data. (my_var.clone())
+- Copy: when assigning a type instead of moving the ownership the value is copied.
+- PartialEq: adds code that allows to compare type values withe the == operator.
 
 ## Keywords
 
-fn, return, let, const, mut, struct, impl, mod, pub, use, if / else if / else, match, for in, while, loop, break,
+fn, return, let, const, mut, struct, impl, mod, pub, use, super, if / else if / else, match, for in, while, loop, break,
 continue, enum
 
 ## Other
 
 - test are ignored in normal compilation.
-- trait is a collection of methods that types can implement.
 - if main does not returns at all, rust assume the program finished successfully (exit code: 0).
 - libraries are called crates.
 - Rust has type inference.
