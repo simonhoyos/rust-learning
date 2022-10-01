@@ -29,19 +29,33 @@
 use std::collections::HashMap;
 use std::io::{Error, ErrorKind};
 
-pub fn tournament_winner(competitions: Vec<Vec<&str>>, results: Vec<usize>) -> Result<String, Error> {
+pub fn tournament_winner(
+    competitions: Vec<Vec<&str>>,
+    results: Vec<usize>,
+) -> Result<String, Error> {
     if competitions.len() <= 0 || results.len() <= 0 {
-        return Err(Error::new(ErrorKind::Other, "There should be at least two teams in the competition"));
+        return Err(Error::new(
+            ErrorKind::Other,
+            "There should be at least two teams in the competition",
+        ));
     }
 
     let mut points: HashMap<String, usize> = HashMap::new();
 
     for (i, w) in results.iter().enumerate() {
         let entry = competitions[i][*w];
-        points.entry(entry.to_string()).and_modify(|counter| *counter += 1).or_insert(1);
+        points
+            .entry(entry.to_string())
+            .and_modify(|counter| *counter += 1)
+            .or_insert(1);
     }
 
-    Ok(points.keys().max().replace(&"something".to_string()).unwrap_or(&"No winner".to_string()).to_string())
+    Ok(points
+        .keys()
+        .max()
+        .replace(&"something".to_string())
+        .unwrap_or(&"No winner".to_string())
+        .to_string())
 }
 
 #[cfg(test)]

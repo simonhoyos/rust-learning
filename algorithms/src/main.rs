@@ -1,4 +1,5 @@
 mod anagram;
+mod find_largest;
 mod fizzbuzz;
 mod non_constructible_change;
 mod sorted_squared_array;
